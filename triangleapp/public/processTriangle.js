@@ -20,6 +20,8 @@ const errorIds={
  
 function validateInputs()
 {
+    //This function validates the inputs
+    //It simultaneously validates for missing input and also checks to see that the input is not a negative number or zero
     
     var num1 = parseFloat(document.getElementById(ids.n1).value);
     var num2 = parseFloat(document.getElementById(ids.n2).value);
@@ -58,6 +60,7 @@ function validateInputs()
 
 function removeErrorMessages()
 {
+    //this function removes the DOM element created in the form
     var numerr1 = document.getElementById(errorIds.n1);
     var numerr2 = document.getElementById(errorIds.n2);
     var numerr3 = document.getElementById(errorIds.n3);
@@ -77,6 +80,8 @@ function removeErrorMessages()
 
 function getTheErrorMessageOnInputs(currentId, message, newId)
 {
+    //Based on the validation of the inputs, this fucntion is used to display the error messages accordingly
+    //using the DOM element creation and also by using Tradeshift UI
         var div = document.getElementById(currentId);
 
         var dl = document.createElement("dl"); 
@@ -96,6 +101,7 @@ function getTheErrorMessageOnInputs(currentId, message, newId)
 
 function processSubmit(num1,num2,num3)
 {
+    //Here we create an object to the triangle class and check for the type of the triangle,
     const triangleObject = new Triangle(num1,num2,num3);
     var type = triangleObject.checkThetype();
     triangleObject.printTheAnswer(type);
@@ -136,6 +142,8 @@ class Triangle
 
     checkThetype()
     {
+        //this is the main function which first checs if the inputs satisfy the triangle property
+        //and then the type and returns the same.
         console.log(this.num1,this.num2,this.num3)
         if(!this.checkTheProperty()){
             return typeOfTriangle.UNKNOWN 
@@ -155,6 +163,8 @@ class Triangle
 
     printTheAnswer(type)
     {
+        //Based on the type of triangle detected, we build a modal and display some basic information regarding the type of
+        //the triangle
         const resultMessage = {
             EQILATERAL :"An equilateral triangle is a triangle in which all three sides are equal.It is also equiangular; that is, all three internal angles are also congruent to each other and are each 60°. It is also a regular polygon, so it is also referred to as a regular triangle.",
             ISOCELES : "An isosceles triangle is a triangle that has two sides of equal length. Sometimes it is specified as having exactly two sides of equal length, and sometimes as having at least two sides of equal length, the latter version thus including the equilateral triangle as a special case.",

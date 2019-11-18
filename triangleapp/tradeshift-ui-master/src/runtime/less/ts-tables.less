@@ -1,0 +1,618 @@
+@color-table-selected: @ts-color-gray-lightest;
+
+.ts-table {
+	.ts-mixin-unselectable();
+	background-color: @ts-color-white;
+	margin-bottom: @ts-unit;
+	overflow: hidden;
+	position: relative;
+	display: block;
+	&.ts-hascols,
+	&.ts-hasrows {
+		// border: 1px solid @ts-color-gray-lighter;
+	}
+	table {
+		table-layout: fixed;
+		border-collapse: collapse;
+		margin: 0 !important;
+		width: 100%;
+	}
+	thead {
+		.ts-table-numbered {
+			vertical-align: middle;
+			padding: @ts-unit-half;
+		}
+	}
+	td {
+		border: 1px solid @ts-color-gray-lighter;
+		-webkit-user-select: text;
+		-moz-user-select: text;
+		user-select: text;
+		&.ts-has-extra {
+			text-align: center;
+			&.ts-has-button .ts-button {
+				width: calc(~'100% - @{ts-unit-quarter}');
+			}
+			&.ts-has-switch {
+				.ts-table-cell {
+					padding: 0 !important;
+				}
+				.ts-fieldset {
+					padding: 0;
+					margin: 0;
+				}
+				span {
+					display: none;
+				}
+				.ts-label {
+					height: @ts-unit-double;
+				}
+				.ts-switchlabel {
+					text-align: center;
+				}
+				.ts-switcher {
+					top: @ts-unit-half - 1px;
+				}
+			}
+			&.ts-has-image {
+				.ts-image {
+					display: block;
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+	th {
+		border: 1px solid @ts-color-gray-lighter;
+		border-bottom-color: @ts-color-gray-lighter;
+		border-top: none;
+		overflow: hidden;
+	}
+	td,
+	th {
+		text-align: left;
+		&:first-child {
+			border-left: none;
+		}
+		&:last-child {
+			border-right: none;
+		}
+		&:not(.ts-table-checkbox) {
+			+ td,
+			+ th {
+				&.ts-number {
+					text-align: right;
+					.ts-button-sort {
+						text-align: right;
+						padding-right: @ts-unit-half;
+					}
+				}
+			}
+		}
+	}
+	.ts-table-body,
+	.ts-table-rows,
+	.ts-table-cols,
+	.ts-table-foot {
+		position: relative;
+	}
+	.ts-table-cols {
+		background-color: @ts-color-white;
+	}
+	.ts-table-gutter {
+		background-color: @ts-color-white;
+		z-index: 2;
+	}
+	.ts-table-cols,
+	.ts-table-foot {
+		z-index: 2;
+	}
+	.ts-table-menu {
+		position: absolute;
+		z-index: 4;
+		top: 0;
+		left: 0;
+	}
+	.ts-table-numbered {
+		.ts-mixin-fixwidth(@ts-unit-triple);
+	}
+	.ts-table-checkbox,
+	.ts-table-hilt {
+		.ts-mixin-fixwidth(@ts-unit-double);
+		height: @ts-unit-double;
+		overflow: hidden !important;
+		.ts-table-cell {
+			padding: 0 !important;
+		}
+		button {
+			position: relative;
+			display: block;
+			height: 100%;
+			min-height: @ts-unit-double;
+			width: 100%;
+			color: @ts-color-gray-light;
+			i {
+				.ts-mixin-maximize();
+				font-size: 27px;
+				padding-top: @ts-unit + 1px;
+				pointer-events: none; // Chrome needs this
+			}
+		}
+		&.ts-checked {
+			button {
+				color: @ts-color-blue;
+			}
+		}
+	}
+	.ts-table-new-row {
+		font-style: italic;
+		color: @ts-color-gray;
+	}
+	.ts-table-hilt {
+		button {
+			cursor: default;
+		}
+	}
+	.ts-table-checkbox {
+		cursor: pointer;
+	}
+	.ts-table-cols,
+	.ts-table-menu:not(.ts-open) {
+		th {
+			&.ts-selected {
+				background-color: @color-table-selected;
+			}
+		}
+	}
+	.ts-table-cols {
+		fieldset {
+			display: block;
+			position: relative;
+			height: @ts-unit-double;
+		}
+		.ts-button-sort {
+			.ts-mixin-maximize();
+			cursor: default;
+			width: 100%;
+			padding: @ts-unit-half;
+			padding-right: 0;
+			text-overflow: ellipsis;
+			-ms-text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			color: @ts-color-black;
+			text-align: left;
+			span {
+				.ts-mixin-label-text();
+			}
+			i {
+				.ts-mixin-maximize();
+				left: auto;
+				width: @ts-unit-double;
+				heigth: @ts-unit-double;
+				line-height: @ts-unit-double;
+				text-align: center;
+				font-size: @ts-fontsize;
+				display: none;
+			}
+			&:hover {
+				text-decoration: none;
+			}
+		}
+		.ts-default {
+			color: @ts-color-black;
+			position: relative;
+			z-index: 1;
+			float: left;
+			&:hover {
+				color: @ts-color-blue;
+			}
+		}
+		.ts-search {
+			z-index: 1;
+		}
+		.ts-search,
+		.ts-default {
+			+ .ts-button-sort {
+				padding-left: @ts-unit-double;
+			}
+		}
+		.ts-selected {
+			background-color: @color-table-selected;
+			.ts-button-sort {
+				padding-right: @ts-unit-double !important;
+				i {
+					display: block;
+				}
+			}
+		}
+		.ts-table-checkbox,
+		.ts-table-hilt,
+		.ts-table-numbered {
+			/*
+			// background-color: @ts-color-gray-lighter;
+			border: 1px solid @ts-color-gray-light;
+			border-bottom-color: @ts-color-gray-light;
+			border-left: none;
+			border-top: none;
+			border: none !important;
+			*/
+		}
+	}
+	&:not(.ts-hasrows):not(.ts-maximized):not(.ts-maxrows) {
+		.ts-table-cols {
+			th {
+				border-bottom: none;
+			}
+		}
+	}
+	.ts-table-rows {
+		background-color: @ts-color-gray-lighter;
+	}
+	.ts-table-rows,
+	.ts-table-gutter {
+		.ts-table-cell {
+			position: relative;
+			padding: @ts-unit-half;
+			padding-bottom: @ts-unit-half - 1px;
+		}
+		&.ts-table-vfix {
+			.ts-table-cell,
+			.ts-table-checkbox,
+			.ts-table-hilt {
+				// TODO: STREAMLINE!
+				height: auto !important;
+			}
+		}
+		td {
+			// background-color: @ts-color-white;
+			&.ts-table-hilt {
+				background-color: @ts-color-gray-lighter;
+			}
+			+ td:not(.ts-number) {
+				.ts-table-cell {
+					padding-right: 3px;
+				}
+			}
+			&.ts-editable {
+				&,
+				* {
+					cursor: text;
+				}
+			}
+		}
+		tr:first-child td {
+			border-top: none;
+			.ts-table-cell {
+				padding-bottom: @ts-unit-half;
+			}
+		}
+		tr:last-child td {
+			border-bottom: none;
+			// corrections needed for fix-height tables with empty space (last page)
+		}
+	}
+	.ts-table-rows {
+		display: block;
+		overflow: hidden;
+		//background-color: @ts-color-gray-lighter;
+		//background-color: lime;
+		table {
+			position: relative;
+		}
+		.ts-table-input {
+			.ts-mixin-maximize(0, 0, auto, 0);
+			resize: none;
+			width: 100%;
+			z-index: 1;
+			color: transparent;
+			background-color: transparent;
+			padding: @ts-unit-half;
+			padding-right: 0;
+			&:not(:focus) {
+				overflow-y: hidden;
+				min-height: 100% !important;
+			}
+			&:focus {
+				color: @ts-color-black;
+				background-color: @ts-color-yellow-lightest;
+				//z-index: 2;
+			}
+		}
+		.ts-table-line {
+			.ts-mixin-maximize();
+			//pointer-events: none;
+			border: 1px solid transparent;
+			outline: 1px solid transparent;
+			display: none;
+			z-index: 3;
+			&:focus {
+				border-color: @ts-color-gray-light;
+				outline-color: @ts-color-gray-light;
+			}
+		}
+		.ts-editable {
+			.ts-table-line:focus {
+				border-color: @ts-color-blue;
+				outline-color: @ts-color-blue;
+			}
+		}
+		td {
+			background-color: @ts-color-white;
+			&.ts-selected {
+				background-color: @color-table-selected;
+			}
+			&.ts-table-editmode {
+				background-color: @ts-color-yellow-lightest !important;
+			}
+			&.ts-table-editmode,
+			&.ts-table-invalid {
+				.ts-table-cell {
+					> p,
+					> ul,
+					> ol {
+						// TODO: fix this elsehow :/
+						display: none;
+					}
+				}
+			}
+			&.ts-table-invalid {
+				.ts-table-line:focus {
+					border-color: @ts-color-red;
+					outline-color: @ts-color-red;
+				}
+				.ts-table-input:not(:focus) {
+					background: @ts-color-red-lighter;
+					color: @ts-color-black;
+				}
+			}
+			&:not(.ts-wrap) {
+				white-space: nowrap;
+				word-wrap: normal;
+				p {
+					text-overflow: ellipsis;
+					-ms-text-overflow: ellipsis;
+					overflow: hidden;
+					margin-bottom: 0;
+					+ * {
+						display: none; // only ever show the first line of text
+					}
+				}
+			}
+		}
+	}
+	&.ts-hascols {
+		tr:first-child {
+			.ts-table-line {
+				border-top-width: 2px;
+			}
+		}
+	}
+	&.ts-clickable {
+		.ts-table-rows {
+			tr {
+				cursor: pointer;
+			}
+		}
+	}
+	&.ts-scroll-x {
+		.ts-table-gutter {
+			display: block;
+		}
+		.ts-table-rows {
+			overflow-x: auto;
+		}
+	}
+	&.ts-table-navimode {
+		.ts-table-line {
+			display: block;
+		}
+	}
+	&.ts-wrapping {
+		.ts-table-cols {
+			th:last-child {
+				fieldset:after {
+					content: '';
+					position: absolute;
+					width: @ts-unit-double;
+					height: @ts-unit-double;
+					background-color: @ts-color-gray-lighter;
+					left: 100%;
+				}
+				&.ts-selected {
+					fieldset:after {
+						background-color: @color-table-selected;
+					}
+				}
+			}
+		}
+		&.ts-maxrows {
+			.ts-table-rows {
+				overflow-y: scroll;
+			}
+		}
+	}
+	.ts-table-row-selected {
+		td {
+			background-color: @ts-color-blue-lightest;
+			&.ts-selected {
+				background-color: @ts-color-blue-lighter;
+			}
+		}
+	}
+	.ts-table-row-unselectable {
+		background-color: @ts-color-gray-lighter;
+		color: @ts-color-gray;
+		td {
+			background-color: transparent;
+		}
+	}
+	.ts-table-foot {
+		padding: 0;
+		.ts-footerbar {
+			&:after {
+				display: none;
+			}
+			/*
+			.ts-toolbar {
+				background-color: @ts-color-gray-lightest;
+			}
+			*/
+		}
+	}
+	.ts-table-gutter,
+	.ts-table-menu {
+		overflow: hidden;
+		position: absolute;
+		width: @ts-unit-double;
+	}
+	.ts-table-gutter {
+		border-right: 1px solid @ts-color-gray-lighter;
+		top: 0;
+		right: auto;
+		bottom: auto;
+		left: 0;
+		display: none;
+	}
+	.ts-table-menu {
+		border-right: 1px solid @ts-color-gray-light;
+		table {
+			width: auto;
+		}
+		&.ts-open {
+			width: 100%;
+			border-right: none;
+			th {
+				border-top: none;
+				border-left: none;
+				border-right: none;
+			}
+			.ts-table-choices {
+				padding-top: @ts-unit-quarter + 0.5px;
+				white-space: nowrap;
+				width: 100%;
+				.ts-button {
+					// TODO: a general "small button" setup!
+					.ts-mixin-fixheight(@ts-unit-plus);
+					padding-top: 0;
+					padding-bottom: 0;
+					span {
+						position: relative;
+						top: 0.5px;
+					}
+				}
+			}
+			.ts-table-choices-close {
+				text-align: right;
+				padding-right: 0;
+				width: @ts-unit-double;
+				.ts-button {
+					margin: 0;
+					border: none;
+					&:after {
+						display: none;
+					}
+				}
+			}
+			&.ts-engine-gecko {
+				.ts-table-choices {
+					padding-top: @ts-unit-quarter - 1px;
+				}
+			}
+		}
+	}
+	td + td.ts-number {
+		.ts-table-input {
+			text-align: right;
+			padding: @ts-unit-half;
+			padding-left: 0;
+		}
+	}
+	&.ts-maximized {
+		.ts-mixin-maximize();
+		border: none;
+		margin-bottom: 0;
+		.ts-table-body {
+			.ts-mixin-maximize(@ts-unit-double, 0, 0, 0);
+			.ts-table-rows {
+				min-height: 100%;
+				max-height: 100% !important;
+				height: 100%;
+				display: block;
+				overflow-y: scroll !important; // TODO: toogle just-in-time on rowdata
+			}
+		}
+		/*
+		 * TODO: This???
+		 *
+		.ts-table-rows {
+			padding: @ts-unit;
+		}
+		*/
+		.ts-table-foot {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		&.ts-level-3 .ts-table-body {
+			bottom: @ts-unit * 3;
+		}
+		&.ts-level-5 .ts-table-body {
+			bottom: @ts-unit * 5;
+		}
+		&.ts-level-8 .ts-table-body {
+			bottom: @ts-unit * 8;
+		}
+	}
+	> .ts-cover {
+		background-color: rgba(255, 255, 255, 0.7);
+		.ts-spinner {
+			top: 50%;
+		}
+	}
+}
+
+// Table List ..................................................................
+
+.ts-table.ts-table-list {
+	// TODO: merge this into default CSS (when approved)
+	td {
+		border: none;
+		border-bottom: 1px solid @ts-color-gray-lighter;
+	}
+	th {
+		border: none;
+		border-bottom: 1px solid @new-bordercolor;
+		background-color: @ts-color-white;
+	}
+	.ts-table-menu {
+		border-right: none;
+	}
+	.ts-table-foot {
+		border-top: none;
+	}
+}
+
+// Browsers ....................................................................
+
+.ts-engine-gecko {
+	//.ts-table-gutter,
+	.ts-table-menu {
+		// border-top: 1px solid @ts-color-gray-lighter; TODO! OFFSET ONE PX!
+	}
+	.ts-wrapping {
+		.ts-table-gutter {
+		}
+	}
+}
+.ts-engine-webkit {
+	.ts-table-gutter {
+		.ts-table-checkbox,
+		.ts-table-hilt {
+			i {
+				margin-left: -1px;
+			}
+		}
+	}
+}

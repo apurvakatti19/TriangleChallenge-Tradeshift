@@ -1,0 +1,176 @@
+/*
+ * Custom units to make table and cells 
+ * appear perfectly square in the aside. 
+ * If calendar is needed outside the 
+ * aside, where there is more space, 
+ * refactor to use standard units...
+ */
+
+@ts-calendar-unit: 20px;
+@ts-calendar-unit-half: 10px;
+@ts-calendar-unit-quarter: 5px;
+@ts-calendar-magic-unit: 41px;
+
+.ts-calendar {
+	line-height: @ts-calendar-unit;
+	margin-bottom: @ts-unit;
+	table {
+		margin: 0;
+		border-collapse: collapse;
+		text-align: center;
+		width: 100%;
+	}
+	th,
+	td {
+		border: none;
+		padding: 0;
+		height: @ts-unit-double;
+	}
+	button {
+		width: @ts-calendar-magic-unit;
+		height: @ts-unit-double;
+		position: relative;
+	}
+	.ts-calendar-transports {
+		th {
+			padding: 0;
+			vertical-align: middle;
+			&.ts-calendar-nogo button {
+				visibility: hidden;
+			}
+		}
+		button,
+		label {
+			padding: @ts-calendar-unit-half @ts-calendar-unit-quarter;
+			display: inline-block;
+		}
+		label {
+			max-width: @ts-calendar-magic-unit;
+			-webkit-font-smoothing: antialiased;
+			text-transform: uppercase;
+			letter-spacing: 0.02em;
+			white-space: nowrap;
+			word-wrap: normal;
+			font-weight: normal;
+		}
+		i {
+			color: @ts-color-black;
+			&:before {
+				font-size: @ts-fontsize-big;
+			}
+		}
+	}
+	.ts-calendar-labels {
+		th {
+			text-transform: uppercase;
+			font-size: @ts-fontsize-small;
+			padding: @ts-unit-half 0;
+			font-weight: @ts-fontweight;
+			color: @ts-color-black;
+		}
+	}
+	.ts-calendar-days {
+		cursor: pointer;
+		button {
+			display: inline-block;
+			padding: 0;
+			color: @ts-color-black;
+			span {
+				display: inline-block;
+				width: @ts-unit-plus;
+				height: @ts-unit-plus;
+				line-height: @ts-unit-plus;
+				position: relative;
+				margin: (@ts-unit-quarter - 1px);
+				border-radius: 100%;
+				padding: 0;
+			}
+			&:hover,
+			&:focus {
+				span {
+					background-color: @ts-color-blue-lightest;
+				}
+			}
+		}
+		.ts-calendar-other {
+			button {
+				color: @ts-color-gray-light;
+				&:hover,
+				&:focus {
+					color: @ts-color-black;
+				}
+			}
+		}
+		.ts-selected {
+			button,
+			button:hover {
+				font-weight: @ts-fontweight-semibold;
+				color: @ts-color-white;
+				span {
+					background-color: @ts-color-blue;
+				}
+			}
+		}
+		.ts-calendar-today {
+			span:after {
+				content: '';
+				position: absolute;
+				border-radius: 3px;
+				width: (@ts-unit-quarter + 1px);
+				height: (@ts-unit-quarter + 1px);
+				left: 50%;
+				bottom: 3px;
+				margin-left: -3px;
+				background-color: @ts-color-blue;
+			}
+			&.ts-selected {
+				span:after {
+					background-color: @ts-color-white;
+				}
+			}
+		}
+		.ts-calendar-nogo {
+			button {
+				&:hover,
+				&:focus {
+					color: @ts-color-gray-light;
+					span {
+						background-color: transparent;
+					}
+				}
+			}
+			&,
+			button,
+			span {
+				cursor: default;
+			}
+			span:before {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 50%;
+				border-bottom: 1px solid @ts-color-blue;
+			}
+			&.ts-calendar-other {
+				span:after {
+					border-color: @ts-color-gray-light;
+				}
+			}
+		}
+	}
+}
+.ts-mobile-only {
+	.ts-aside {
+		width: 100%;
+		.ts-calendar {
+			table {
+				width: 100%;
+				th,
+				td {
+					width: auto;
+				}
+			}
+		}
+	}
+}

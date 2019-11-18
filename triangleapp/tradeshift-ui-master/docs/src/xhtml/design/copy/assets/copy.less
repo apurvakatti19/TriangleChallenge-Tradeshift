@@ -1,0 +1,41 @@
+@import '../../../../less/ts-runtime.less';
+
+figure {
+	&:before {
+		display: block;
+		text-transform: uppercase;
+		font-size: @ts-fontsize-small;
+		font-weight: 400;
+		padding: @ts-unit-quarter @ts-unit-half @ts-unit-quarter @ts-unit;
+		margin: 0;
+		width: 100%;
+	}
+	p,
+	dl {
+		padding: @ts-unit;
+	}
+	p,
+	dd {
+		font-style: italic;
+		letter-spacing: 0;
+	}
+	dt {
+		font-style: normal;
+		font-weight: 400;
+	}
+	p + p {
+		padding-top: 0;
+	}
+	&.bad-copy {
+		&:before {
+			content: 'Bad copy';
+			background-color: rgb(250, 200, 200);
+		}
+	}
+	&.good-copy {
+		&:before {
+			content: 'Good copy';
+			background-color: rgb(200, 250, 200);
+		}
+	}
+}

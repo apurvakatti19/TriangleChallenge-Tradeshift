@@ -1,0 +1,583 @@
+// Styles both ToolBar, TopBar and TabBar! .....................................
+
+.ts-toolbar {
+	.ts-mixin-unselectable();
+	.ts-mixin-fixheight(@ts-unit-triple);
+	white-space: nowrap;
+}
+.ts-toolbar-menu {
+	position: absolute;
+	font-size: 0;
+	white-space: nowrap;
+	margin: 0 !important;
+	&.ts-left,
+	&.ts-right {
+		z-index: 1;
+	}
+	&.ts-left {
+		left: 0;
+		&,
+		& > li {
+			.ts-mixin-fixheight(@ts-unit-triple);
+			.ts-button {
+				display: inline-block;
+				&,
+				&:hover {
+					background-color: transparent !important; // TODO: rounded + hovercolor
+				}
+			}
+			.ts-action {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+		> li {
+			&.ts-toolbar-icon {
+				padding-left: @ts-unit-half;
+				padding-right: @ts-unit-half;
+				img {
+					display: block;
+				}
+			}
+		}
+	}
+	&.ts-left {
+	}
+	&.ts-right {
+		right: 0;
+		.ts-toolbar-item {
+			&:last-child {
+				padding-right: @ts-unit-half;
+			}
+		}
+	}
+	&.ts-left ~ .ts-right {
+		li:first-child {
+			padding-left: @ts-unit-quarter;
+		}
+	}
+	&.ts-center {
+		width: 100%;
+		text-align: center;
+		> .ts-toolbar-item {
+			position: relative;
+			z-index: 2;
+		}
+	}
+}
+.ts-toolbar-item {
+	font-size: @ts-fontsize;
+	display: inline-block;
+	vertical-align: middle;
+	padding: @ts-unit-half @ts-unit-quarter;
+	> * {
+		margin: 0;
+	}
+	&.ts-flex {
+		.ts-label {
+			width: 100%;
+		}
+		.ts-button {
+			&.ts-tertiary,
+			&.ts-secondary,
+			&.ts-primary {
+				width: 100%;
+			}
+		}
+	}
+}
+.ts-toolbar-title,
+.ts-toolbar-status {
+	padding-left: 0;
+	padding-right: 0;
+	text-overflow: ellipsis;
+	&:first-child {
+		padding-left: @ts-unit;
+	}
+	label {
+		font-size: @ts-fontsize-big;
+		padding: @ts-unit-half;
+		padding-left: 0;
+		line-height: @ts-unit;
+		display: block;
+		position: relative;
+		top: -1px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+.ts-toolbar-status {
+	&:first-child {
+		padding-left: @ts-unit-plus;
+	}
+	&:not(:first-child) {
+		padding-left: 0 !important;
+	}
+	label {
+		font-size: @ts-fontsize;
+		top: 0;
+	}
+}
+.ts-toolbar-search {
+	position: relative;
+	min-width: @ts-unit-double;
+	min-height: @ts-unit-double;
+	padding-left: @ts-unit-half;
+	padding-right: @ts-unit-half;
+	&.ts-searching {
+		width: @ts-width-aside;
+		padding-right: @ts-unit-half;
+		+ .ts-toolbar-title {
+			display: none;
+		}
+	}
+}
+.ts-toolbar .ts-left:only-child {
+	.ts-toolbar-search.ts-flex {
+		padding-right: @ts-unit-half;
+	}
+}
+.ts-hasright {
+	.ts-toolbar-search {
+		&.ts-flex {
+			padding-right: @ts-unit-quarter * 0.5;
+		}
+	}
+}
+
+// Theming .....................................................................
+
+.ts-content > .ts-toolbar {
+	background-color: @ts-color-white;
+}
+
+// Tabs ........................................................................
+
+.ts-toolbar-tabs {
+	position: relative;
+	white-space: nowrap;
+	margin: 0;
+	padding: 0;
+	z-index: 2;
+	float: left;
+	font-size: 0;
+	overflow: hidden;
+	> * {
+		font-size: @ts-fontsize;
+	}
+	button.ts-button {
+		display: inline;
+	}
+	.ts-tab {
+		padding: 0;
+	}
+	.ts-tab-indicator {
+		height: 2px;
+		background-color: @ts-color-black;
+		position: absolute;
+		left: 0;
+		bottom: 0px;
+		width: 100px;
+	}
+	.ts-button {
+		.ts-mixin-menuitem();
+		padding: @ts-unit;
+		position: relative;
+		margin: 0;
+		border-right: 1px solid transparent;
+		em {
+			background-color: @ts-color-gray-lighter;
+			color: @ts-color-slate-lightest;
+			min-width: 22px;
+			text-align: center;
+			border-radius: @ts-radius;
+			font-size: @ts-fontsize-small;
+			font-weight: @ts-fontweight-semibold;
+			position: absolute;
+			right: @ts-unit-half;
+			top: 50%;
+			z-index: 1;
+			margin-top: 0 - 10px;
+		}
+		&:hover {
+			span {
+				text-decoration: none;
+				color: @ts-color-black;
+			}
+			em {
+				background-color: @ts-color-black;
+				color: @ts-color-white;
+			}
+			.ts-tab-icon {
+				color: @ts-color-black;
+			}
+		}
+		.ts-tab-icon {
+			cursor: default;
+			padding-right: 3px;
+		}
+		.ts-tab-label {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+	.ts-tab {
+		display: inline-block;
+		&.ts-counter {
+			.ts-button {
+				padding-right: @ts-unit-double;
+			}
+		}
+		&.ts-selected {
+			.ts-button {
+				em {
+					background-color: @ts-color-black;
+					color: @ts-color-white;
+				}
+				&:after {
+					border-color: @ts-color-blue;
+				}
+				i {
+					cursor: pointer;
+					margin-left: @ts-unit-quarter;
+				}
+			}
+		}
+		&:not(.ts-selected) {
+			.ts-button:hover {
+				&:after {
+					border-color: @ts-color-blue;
+				}
+			}
+		}
+		&.ts-tab-close {
+			.ts-button {
+				padding-right: (@ts-unit * 2.5);
+				.ts-close-bg {
+					width: @ts-unit-double;
+					height: @ts-unit-double;
+					border-radius: 100%;
+					text-align: center;
+					position: absolute;
+					right: @ts-unit-half;
+					top: @ts-unit-half;
+					&:hover {
+						cursor: pointer;
+					}
+					i {
+						line-height: @ts-unit-double;
+						margin-left: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Initial transitions supressed via JS ........................................
+
+.ts-toolbar.ts-transition {
+	.ts-toolbar-tabs {
+		.ts-button {
+			.ts-mixin-transition-colors(@ts-transition-now);
+		}
+		.ts-tab-indicator {
+			.ts-mixin-transition-transform(@ts-transition-now * 0.5, @ts-timing-easeinoutexpo);
+		}
+	}
+}
+
+// Tabs buttons (add new, show more ) ..........................................
+
+.ts-toolbar-tabs {
+	.ts-tab {
+		.ts-button {
+			color: @ts-color-slate-lightest;
+		}
+		&.ts-selected .ts-button {
+			color: @ts-color-black;
+		}
+		&.ts-tab-button {
+			overflow: hidden;
+			vertical-align: top;
+			padding: 0 !important;
+			max-width: @ts-unit-double;
+			.ts-button {
+				padding: @ts-unit-quarter !important;
+				border-right: none !important;
+				&:hover {
+					&:after {
+						border-color: transparent;
+					}
+				}
+				.ts-tab-label {
+					max-width: 0;
+				}
+				i {
+					border-radius: 100%;
+					display: inline-block !important;
+					line-height: @ts-unit-plus;
+					.ts-mixin-fix(@ts-unit-plus, @ts-unit-plus);
+					.ts-mixin-transition(border-color, @ts-transition-now);
+					&.ts-icon-other {
+						border-top: 1px solid transparent; // align with buttons
+					}
+				}
+			}
+		}
+	}
+}
+.ts-macro {
+	.ts-toolbar-tabs {
+		.ts-tab {
+			&.ts-tab-button {
+				.ts-button i {
+					top: @ts-unit-half;
+					&.ts-icon-add {
+						font-size: 27px;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Statusbar ...................................................................
+
+.ts-toolbar {
+	&.ts-micro,
+	&.ts-macro {
+		.ts-toolbar-item.ts-action:first-child {
+			padding-left: @ts-unit;
+		}
+	}
+}
+
+// Micro toolbar ...............................................................
+
+.ts-toolbar.ts-micro {
+	.ts-mixin-fixheight(@ts-unit-double);
+	.ts-left {
+		&,
+		& > .ts-tab {
+			.ts-mixin-fixheight(@ts-unit-double);
+			.ts-action {
+				height: @ts-unit-plus;
+				max-height: @ts-unit-plus;
+			}
+		}
+		.ts-toolbar-item {
+			padding: @ts-unit-quarter;
+			&.ts-toolbar-title,
+			&.ts-toolbar-status {
+				&:first-child {
+					padding-left: @ts-unit;
+				}
+				label {
+					font-size: @ts-fontsize;
+					padding-top: @ts-unit-quarter;
+					padding-bottom: @ts-unit-quarter;
+				}
+			}
+			&.ts-toolbar-title {
+				label {
+					font-weight: 600;
+				}
+			}
+			&.ts-toolbar-checkbox {
+				padding: 0 !important;
+				.ts-button {
+					.ts-mixin-fix(@ts-unit-double, @ts-unit-double);
+					&:hover {
+						text-decoration: none;
+					}
+					i {
+						&:before {
+							font-size: 27px !important;
+							top: 2px;
+						}
+						&.ts-icon-checkboxon,
+						&.ts-icon-checkbox-indeterminate {
+							color: @ts-color-blue;
+						}
+						&.ts-icon-checkbox {
+							color: @ts-color-gray-light;
+						}
+					}
+				}
+			}
+		}
+	}
+	.ts-toolbar-tabs,
+	.ts-tab {
+		.ts-mixin-fixheight(@ts-unit-double);
+	}
+	.ts-toolbar-tabs {
+		padding-left: @ts-unit-half;
+		.ts-button {
+			padding: @ts-unit-half;
+			span {
+				font-size: @ts-fontsize;
+				font-weight: @ts-fontweight-semibold;
+			}
+			&:after {
+				display: none;
+			}
+		}
+	}
+	.ts-counter,
+	.ts-tab-close {
+		.ts-button {
+			padding-right: @ts-unit-double;
+		}
+	}
+	.ts-tab-close {
+		.ts-button {
+			.ts-close-bg {
+				top: 0;
+				right: 0;
+			}
+		}
+	}
+	.ts-add-tab,
+	.ts-tab-more {
+		.ts-button {
+			.ts-mixin-fixheight(@ts-unit-double);
+			&:hover {
+				color: @ts-color-black;
+			}
+		}
+	}
+}
+
+// Button groups ...............................................................
+
+.ts-toolbar .ts-join .ts-button {
+	&,
+	&:after {
+		border-radius: 0;
+	}
+	padding-left: @ts-unit-quarter;
+	padding-right: @ts-unit-quarter;
+	&:first-child {
+		padding-left: @ts-unit-half;
+		&,
+		&:after {
+			border-radius: @ts-unit 0 0 @ts-unit;
+		}
+	}
+	&:last-child {
+		padding-right: @ts-unit-half;
+		&,
+		&:after {
+			border-radius: 0 @ts-unit @ts-unit 0;
+		}
+	}
+	+ .ts-button {
+		&:after {
+			border-left: 1px solid @ts-color-white;
+		}
+		&.ts-tertiary {
+			&:after {
+				border-left: none;
+			}
+		}
+	}
+}
+
+// Before and after Main .......................................................
+
+.ts-toolbar-first,
+.ts-toolbar-last {
+	position: absolute;
+	z-index: @ts-zindex-main + 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	&:not(.ts-tabbar):after {
+		height: 5px;
+		width: 100%;
+		position: absolute;
+		pointer-events: none;
+	}
+}
+.ts-toolbar-first {
+	&.ts-bg-lite {
+		&:after {
+			content: '';
+			top: 100%;
+			background: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35));
+		}
+	}
+	&.ts-micro + .ts-toolbar-first {
+		top: @ts-unit * 2;
+	}
+	&.ts-macro + .ts-toolbar-first {
+		top: @ts-unit * 3;
+	}
+}
+.ts-toolbar-last {
+	top: auto;
+	bottom: 0;
+	&.ts-bg-lite {
+		&:after {
+			content: '';
+			top: -5px;
+			background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0));
+		}
+	}
+}
+
+.ts-has-topbar {
+	.ts-toolbar-first {
+		top: @ts-unit-triple;
+		&.ts-micro + .ts-toolbar-first {
+			top: @ts-unit-triple + @ts-unit * 2;
+		}
+		&.ts-macro + .ts-toolbar-first {
+			top: @ts-unit-triple + @ts-unit * 3;
+		}
+	}
+	.ts-toolbar-last {
+		top: auto;
+		bottom: 0;
+	}
+}
+
+// Breakpoints .................................................................
+
+.ts-mobile-only {
+	&.ts-has-topbar-tabs {
+		.ts-toolbar-first {
+			top: @ts-unit-triple + @ts-unit-double;
+		}
+	}
+}
+.ts-tablet {
+	&.ts-has-sidebar-first {
+		.ts-toolbar-first,
+		.ts-toolbar-last {
+			left: @ts-width-aside;
+		}
+	}
+	&.ts-has-sidebar-last {
+		.ts-toolbar-first,
+		.ts-toolbar-last {
+			right: @ts-width-aside;
+		}
+	}
+}
+
+// Browsers ....................................................................
+
+.ts-engine-explorer9 {
+	.ts-toolbar-first:after {
+		border-top: 1px solid rgba(0, 0, 0, 0.35);
+		background: none;
+	}
+	.ts-toolbar-last:after {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+		background: none;
+	}
+}

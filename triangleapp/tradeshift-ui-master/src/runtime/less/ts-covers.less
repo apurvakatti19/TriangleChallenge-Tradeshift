@@ -1,0 +1,43 @@
+.ts-cover {
+	.ts-mixin-maximize();
+	.ts-mixin-unselectable();
+	z-index: @ts-zindex-max;
+	pointer-events: none;
+	overflow: hidden;
+	.ts-spinner {
+		position: absolute;
+		width: 200px;
+		height: 80px;
+		top: 37.2%;
+		left: 50%;
+		text-align: center;
+		transform: translateX(0 - 50%);
+		span {
+			.ts-mixin-maximize();
+			top: auto;
+		}
+	}
+	.ts-mixin-transition(opacity, @ts-transition-fast, @ts-timing-easeoutquint);
+	opacity: 0;
+	&.ts-visible {
+		opacity: 1;
+	}
+	&.ts-blocking,
+	&.ts-asidecover,
+	&.ts-dialogcover,
+	&.ts-tablecover {
+		pointer-events: auto;
+	}
+	&.ts-opaque,
+	&.ts-asidecover,
+	&.ts-dialogcover {
+		background-color: rgba(0, 0, 0, 0.71);
+		color: @ts-color-white;
+	}
+	&.ts-asidecover {
+		z-index: @ts-zindex-aside-cover;
+	}
+	&.ts-dialogcover {
+		z-index: @ts-zindex-dialog-cover;
+	}
+}

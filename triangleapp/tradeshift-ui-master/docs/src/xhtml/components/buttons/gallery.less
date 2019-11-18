@@ -1,0 +1,42 @@
+@import '../../../less/ts-runtime.less';
+
+table {
+	width: 100%;
+	height: 100%;
+	table-layout: fixed;
+}
+th,
+td {
+	width: 100% / 7;
+	padding: @ts-unit;
+}
+th {
+	height: @ts-unit-triple;
+	font-weight: normal;
+}
+td {
+	padding-top: 0;
+}
+section {
+	padding: @ts-unit-double;
+	margin-bottom: 0;
+}
+label {
+	&.ts-focus,
+	&.ts-focus-on {
+		background-color: transparent !important; // hotfix
+	}
+}
+.nested {
+	position: absolute;
+	bottom: @ts-unit-double;
+	.ts-bg-white {
+		padding: @ts-unit-half;
+		box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	}
+}
+p.todo {
+	display: none;
+	position: absolute;
+	bottom: 0;
+}

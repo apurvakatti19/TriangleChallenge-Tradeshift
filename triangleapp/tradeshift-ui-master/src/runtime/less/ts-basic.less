@@ -1,0 +1,65 @@
+@import 'ts-variables.less';
+@import 'ts-mixins.less';
+
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+	-webkit-tap-highlight-color: transparent;
+}
+*,
+*:before,
+*:after {
+	.ts-mixin-border-box ();
+	cursor: inherit;
+}
+*:focus {
+	outline: none;
+}
+*::-moz-focus-inner {
+	border: none;
+}
+*::-moz-focusring {
+	outline: none;
+}
+::-moz-selection,
+::-webkit-selection,
+::selection {
+	background: @ts-color-blue;
+	color: @ts-color-white;
+}
+::placeholder {
+	font-style: italic;
+}
+html {
+	background-color: @ts-color-gray-lighter;
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
+}
+body {
+	visibility: hidden; // hide everything during page load, see next declaration!
+	font-family: @ts-fontstack;
+	font-weight: @ts-fontweight;
+	color: @ts-color-black;
+	font-size: @ts-fontsize;
+	line-height: @ts-unit;
+	position: relative;
+	cursor: default;
+}
+.ts-ready body {
+	visibility: visible !important;
+}
+
+/* TODO: move to Spiritual ...................................................*/
+
+._gui-invisible {
+}
+._gui-hidden,
+.ts-hidden {
+	display: none !important;
+}

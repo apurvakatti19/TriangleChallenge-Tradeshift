@@ -1,0 +1,24 @@
+@import '../../../../less/ts-runtime.less';
+
+article {
+	figure {
+		img {
+			max-width: 100%;
+		}
+		&:not(.plain) {
+			background-color: rgb(255, 255, 255);
+			text-align: center;
+			img {
+				border: @ts-unit solid rgb(255, 255, 255);
+			}
+		}
+		figcaption {
+			text-align: left;
+			font-weight: 300;
+			font-style: italic;
+			font-size: @ts-fontsize-mini;
+			padding: @ts-unit;
+			padding-top: 0;
+		}
+	}
+}

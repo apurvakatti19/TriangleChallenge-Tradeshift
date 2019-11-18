@@ -1,0 +1,121 @@
+@import 'ts-variables.less';
+
+.ts-menu {
+	list-style: none;
+	> li {
+		display: block;
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+		> button,
+		> a {
+			border-bottom: 1px solid transparent; // TODO: delete if OK
+			background-color: transparent;
+			color: @ts-color-black;
+			font-weight: @ts-fontweight-semibold;
+			&:focus:not(:active) {
+				outline: none;
+			}
+			&:hover:not(:disabled),
+			&:focus {
+				background-color: @ts-color-blue-lightest;
+			}
+			&:not(.ts-object) {
+				.ts-mixin-unselectable();
+				display: block;
+				position: relative;
+				width: 100%;
+				padding: @ts-unit-half @ts-unit-half (@ts-unit-half - 1px) @ts-unit-half;
+				text-align: left;
+				text-decoration: none;
+				> span,
+				> sub {
+					width: 100%;
+					display: block;
+					padding-right: @ts-unit-plus; // icon on the right by default
+				}
+				> sub {
+					font-size: @ts-fontsize-mini;
+					font-weight: @ts-fontweight;
+					line-height: @ts-unit;
+				}
+				> img,
+				> i {
+					position: absolute;
+					left: @ts-unit-half; // icon on the left by default
+					line-height: 0;
+					top: 50%;
+					&:only-child {
+						position: relative;
+						left: 0;
+					}
+				}
+				> img {
+					top: @ts-unit-half;
+					left: @ts-unit-half;
+				}
+				& > span + i,
+				& > sub + i {
+					// icon on the right
+					left: auto;
+					right: @ts-unit-half;
+				}
+				& > i ~ span,
+				& > i ~ sub {
+					// icon on the left
+					padding-left: @ts-unit-plus;
+				}
+				& > img ~ span,
+				& > img ~ sub {
+					padding-left: @ts-unit-double + @ts-unit-half;
+				}
+				&:hover {
+					span,
+					sub,
+					& {
+						text-decoration: none;
+					}
+				}
+			}
+			&:disabled {
+				color: @ts-color-gray-light;
+				background-color: transparent;
+				cursor: not-allowed;
+			}
+		}
+		&:only-child {
+			> button,
+			> a {
+				.ts-mixin-rounded ();
+			}
+		}
+		&.ts-checked {
+			> button,
+			> a {
+				&:disabled {
+					background-color: @ts-color-gray-lighter;
+					color: @ts-color-gray;
+				}
+				&:not(:disabled) {
+					background-color: @ts-color-blue;
+					color: @ts-color-white;
+					&:hover,
+					&:focus {
+						background-color: @ts-color-blue-dark;
+					}
+				}
+			}
+		}
+	}
+	&.ts-user-menu {
+		> li {
+			button,
+			a {
+				min-height: @ts-unit-triple;
+				> sub {
+					text-transform: none;
+				}
+			}
+		}
+	}
+}

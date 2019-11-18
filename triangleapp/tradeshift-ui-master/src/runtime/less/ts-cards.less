@@ -1,0 +1,210 @@
+@cardheight: @ts-unit * 8;
+
+/*
+ * TODO: share as many styles as possible between the different cards :)
+ */
+
+.ts-card.ts-default,
+.ts-companycard.ts-details {
+	// TEMP: Companycard needs details rendering!
+	display: block;
+	max-width: (@ts-width-aside - @ts-unit);
+	background-color: @ts-color-white;
+	color: @ts-color-slate-lightest;
+	height: @cardheight;
+	margin-bottom: @ts-unit;
+	position: relative;
+	box-shadow: @ts-shadow;
+	border: 1px solid @new-bordercolor;
+	.ts-card-connection {
+		.ts-mixin-maximize();
+		top: auto;
+		background-color: @ts-color-gray-lighter;
+		height: @ts-unit-double - 1px;
+		padding: @ts-unit-half (@ts-unit * 4) (@ts-unit-half - 1px) (@ts-unit-double - 1px);
+	}
+	.ts-card-connection-icon {
+		width: @ts-unit-double - 1px;
+		height: @ts-unit-double - 1px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		line-height: @ts-unit-double;
+	}
+	.ts-card-connection-text {
+		color: @ts-color-slate-lightest;
+	}
+}
+
+// CompanyCard .................................................................
+
+.ts-companycard-main {
+	.ts-mixin-maximize();
+	bottom: @ts-unit-double;
+	padding: @ts-unit-half - 1px;
+	overflow: hidden;
+}
+.ts-companycard-name {
+	margin: 0;
+	font-size: @ts-fontsize-medium;
+	font-weight: @ts-fontweight-semibold;
+	max-height: @ts-unit-double;
+	overflow: hidden;
+}
+.ts-companycard-details {
+	font-size: @ts-fontsize-small;
+	text-transform: uppercase;
+	line-height: @ts-unit;
+	padding-top: @ts-unit-quarter;
+	li {
+		padding-left: @ts-unit;
+		position: relative;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		&:first-child {
+		}
+		+ li {
+			margin-right: (@ts-unit * 4);
+		}
+		.ts-icon {
+			width: @ts-unit;
+			height: @ts-unit;
+			font-size: @ts-fontsize;
+			position: absolute;
+			left: 0;
+			top: 0;
+			line-height: @ts-unit;
+		}
+	}
+}
+.ts-companycard-branding {
+	position: absolute;
+	right: -1px;
+	bottom: -1px;
+	width: (@ts-unit * 4);
+	height: (@ts-unit * 4);
+}
+.ts-companycard-logo {
+	width: 100%;
+	display: block;
+	position: relative;
+	border: 1px solid @new-bordercolor;
+	background-color: @ts-color-white;
+}
+.ts-companycard .ts-mockup {
+	color: transparent;
+	.ts-companycard-branding {
+		border: 1px solid @new-bordercolor;
+		background-color: @ts-color-white;
+	}
+	.ts-companycard-details,
+	.ts-companycard-name {
+		span {
+			background-color: @ts-color-gray-lighter;
+		}
+		i {
+			color: @ts-color-gray-lighter;
+		}
+	}
+}
+
+// UserCard ....................................................................
+
+.ts-userimage {
+	background-image: none;
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 100%;
+	display: inline-block;
+	vertical-align: middle;
+	opacity: 0;
+	&:not([width]) {
+		width: @ts-unit-double;
+	}
+	&:not([height]) {
+		height: @ts-unit-double;
+	}
+	&.ts-loaded {
+		opacity: 1;
+	}
+}
+.ts-usercard {
+	&.ts-default,
+	&.ts-details {
+		text-align: center;
+		.ts-userimage {
+			width: @ts-unit-triple + @ts-unit-double;
+			height: @ts-unit-triple + @ts-unit-double;
+		}
+		.ts-usercard-main {
+			padding: @ts-unit-half - 1px;
+			padding-top: @ts-unit - 1px;
+		}
+		.ts-usercard-image {
+			margin-bottom: @ts-unit-quarter;
+		}
+		.ts-usercard-name {
+			margin-top: 0;
+			font-size: @ts-fontsize-medium;
+			font-weight: @ts-fontweight-semibold;
+			max-height: @ts-unit-double;
+			overflow: hidden;
+		}
+	}
+	&.ts-details {
+		.ts-usercard-name {
+			margin-top: @ts-unit-half + @ts-unit-quarter;
+		}
+		.ts-usercard-name,
+		.ts-usercard-details li {
+			margin-bottom: @ts-unit-quarter;
+		}
+	}
+}
+.ts-usercard.ts-compact {
+	display: table;
+	width: 100%;
+	height: @ts-unit-double + @ts-unit;
+	&:not([href]) {
+		text-decoration: none !important;
+	}
+	.ts-usercard-main {
+		display: table-row;
+	}
+	.ts-usercard-image,
+	.ts-usercard-name {
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.ts-usercard-image {
+		width: @ts-unit-double + @ts-unit;
+		text-align: center;
+		.ts-userimage {
+			width: @ts-unit-double;
+			height: @ts-unit-double;
+		}
+	}
+	.ts-usercard-name {
+		.ts-mixin-transition-colors(@ts-transition-now);
+		color: @ts-color-black;
+		font-weight: @ts-fontweight-semibold;
+		padding: @ts-unit-half;
+		padding-left: 0;
+	}
+	&.ts-reverse {
+		.ts-usercard-name {
+			text-align: right;
+			padding: @ts-unit-half;
+			padding-right: 0;
+		}
+	}
+	&.ts-has-details {
+		cursor: pointer;
+		&:hover {
+			.ts-usercard-name {
+				color: @ts-color-blue;
+			}
+		}
+	}
+}

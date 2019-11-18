@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title> My App </title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="ts-app-title" content="Triangle Challenge" />
+    <meta name="ts-app-color" content="ts-blue" />
+    <link rel="stylesheet" href="//d5wfroyti11sa.cloudfront.net/prod/client/ts-12.3.5.min.css" />
+    <script src="//d5wfroyti11sa.cloudfront.net/prod/client/ts-12.3.5.min.js"></script>
+    <script type="text/Javascript" src="processTriangle.js"></script>
+    
+</head>
+<body>
+<div data-ts="App">
+    <div data-ts="Main">
+        <div data-ts="Content">
+            <div data-ts="Panel">
+                <div data-ts="Note" data-ts.closeable="true">
+                    <p>This particular challenge expects three numbers as inputs and returns whether the triangle is
+                        <link href="#" />Equilateral isosceles or scalene<br/><br/><u>Properties of Triangles:</u><br/> The sum of the length of any two sides of a triangle is greater than the length of the third side. <br/> The side opposite to the largest angle of a
+                        triangle is the largest side. <br/> Any exterior angle of the triangle is equal to the sum of its interior opposite angles.<br/></p>
+                </div>
+                <form data-ts="Form">
+                    <fieldset><label><span>Enter the First Number</span>
+                        <input type="number" name="number1" id="number1" /></label>    
+                    </fieldset>
+                
+                    <fieldset><label><span>Enter the Second Number</span><input type="number" name="number2" id="number2"/></label>
+                    </fieldset>
+                
+                    <fieldset><label><span>Enter the Third Number</span><input type="number" name="number3" id="number3"/></label>
+                    </fieldset>
+                    <br>
+                    <div style="text-align: center">
+                    <button data-ts="Button" class="ts-primary" onclick="validateInputs()">
+                            <span>Submit</span>
+                        </button>       
+                    </div>     
+                    <br>
+                    <br>    
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <dialog data-ts="Modal" id="microModal" class="ts-micro-modal"data-ts.title="Triangle Type">
+            <div data-ts="Panel">
+                <article data-ts="Box">
+                    <div id="modalDiv">
+                    </div>
+                        <button  data-ts="Button" onclick="ts.ui.get('#microModal').close()" class="ts-primary">
+                            <span>OK</span>
+                        </button>
+                    </p>
+                </article>
+            </div>
+        </dialog>
+</div>
+
+</body>
+</html>

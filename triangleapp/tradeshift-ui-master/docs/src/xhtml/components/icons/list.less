@@ -1,0 +1,49 @@
+@import '../../../../../src/runtime/less/ts-variables.less';
+
+#icons {
+	th,
+	td {
+		&.icons-size-tiny {
+			i {
+				font-size: @ts-fontsize-small;
+			}
+		}
+		&.icons-size-std {
+			i {
+				font-size: @ts-fontsize-icon;
+			}
+		}
+		&.icons-size-app {
+			i {
+				font-size: @ts-fontsize-xxbig; // App Icon Size
+			}
+		}
+	}
+	tbody > tr {
+		> .ts-has-icon > .ts-table-cell {
+			height: @ts-unit * 3.5;
+			line-height: 0;
+			padding: @ts-unit-half 0;
+			i {
+				top: 50%;
+			}
+		}
+	}
+}
+
+.ts-mobile,
+.ts-mobile-only {
+	// have to override rule in dox.css
+	.intro-container {
+		padding-bottom: 0;
+	}
+	.icons-container {
+		padding-top: @ts-unit-double;
+	}
+}
+.ts-tablet {
+	.icons-container {
+		max-width: none;
+		padding: @ts-unit-double @ts-unit (@ts-unit * 4) @ts-unit-triple;
+	}
+}

@@ -12,7 +12,7 @@
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "grunt-sass": "^3.1.0",
-    "node-sass": "^4.13.0"
+    "node-sass": "^4.13.1"
   },
   "devDependencies": 
   {
